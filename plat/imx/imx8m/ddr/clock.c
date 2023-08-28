@@ -59,12 +59,17 @@ void dram_pll_init(unsigned int drate)
 
 	switch (drate) {
 	case 3200:
-		mmio_write_32(HW_DRAM_PLL_CFG2, 0x00ece580);
+		mmio_setbits_32(HW_DRAM_PLL_CFG1, 0x1);
+		//mmio_write_32(HW_DRAM_PLL_CFG2, 0x00ece580);
+		mmio_write_32(HW_DRAM_PLL_CFG2, 0x00e92580);
 		break;
 	case 1600:
-		mmio_write_32(HW_DRAM_PLL_CFG2, 0x00ec6984);
+		mmio_setbits_32(HW_DRAM_PLL_CFG1, 0x1);
+		//mmio_write_32(HW_DRAM_PLL_CFG2, 0x00ec6984);
+		mmio_write_32(HW_DRAM_PLL_CFG2, 0x00e92582);
 		break;
 	case 667:
+		mmio_clrbits_32(HW_DRAM_PLL_CFG1, 0x1);
 		mmio_write_32(HW_DRAM_PLL_CFG2, 0x00f5a406);
 		break;
 	default:
